@@ -56,10 +56,12 @@ async function startApp() {
    console.error(error)
  }
 }
-  console.log("=========== Start Commenting ==============")
+  console.log("=========== Start Commenting ==============") 
+
 for(let i=0;i<keyword.length;i++){
+  
   //await page.goto("https://www.youtube.com/results?search_query=" + keyword+"&sp=CAI%253D"); <-- if you want to get get videos by newest update , you can use this one
-  await page.goto("https://www.youtube.com/results?search_query=" + keyword[i]+"&sp=EgQQARgD");
+  await page.goto("https://www.youtube.com/results?search_query=" + keyword[i]); //+"&sp=EgQQARgD"
   await page.evaluate(() => {
     document.querySelector("#button").click();
 
@@ -79,8 +81,9 @@ for(let i=0;i<keyword.length;i++){
   });
 
   console.log("Jumlah Link : ", link.length);
+  let j =0;
 
-  for (i in link) {
+  for (j in link) {
     const tweet = await await (await link[i].getProperty("href")).jsonValue();
     console.log(tweet);
     const pages = await browser.newPage();
@@ -117,13 +120,17 @@ for(let i=0;i<keyword.length;i++){
         await page.waitForTimeout(4000);
         await pages.close();
         console.log("Success Comment");
+        console.log("Keyword: "+keyword[i]+" j= " + j);
       }
+      
     } catch(e) {
       await pages.close();
       console.log("Something Wrong maybe this is Short videos , live stream , or broken error : " + e);
     }
   }
+  
 }
+  await browser.close();
   console.log("DONE! HAVE A NICE DAY");
 
 
