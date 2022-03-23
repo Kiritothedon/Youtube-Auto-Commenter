@@ -1,3 +1,10 @@
+/* 
+Made Originally By: https://github.com/tegal1337
+Updated & Upgraded By: https://github.com/KiritoTheDon
+Features Added: 
+- Browser closes when done with all keywords
+- seamlessly continuing commenting all keywords till array is done
+*/
 const puppeteer = require("puppeteer-extra");
 const StealthPlugin = require("puppeteer-extra-plugin-stealth");
 const config = require("./config");
