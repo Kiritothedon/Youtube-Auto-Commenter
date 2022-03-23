@@ -8,7 +8,7 @@ see this DEMO in here  (https://www.youtube.com/watch?v=P2KkjYFLc3A)
 How to run ?
 
 ```bash
-> git clone https://github.com/tegal1337/Youtube-Auto-Commenter/
+> git clone https://github.com/Kiritothedon/Youtube-Auto-Commenter.git
 > cd Youtube-Auto-Commenter
 > npm install
 > node main.js
