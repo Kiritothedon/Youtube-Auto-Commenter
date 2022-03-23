@@ -91,7 +91,7 @@ for(let i=0;i<keyword.length;i++){
   let j =0;
 
   for (j in link) {
-    const tweet = await await (await link[i].getProperty("href")).jsonValue();
+    const tweet = await await (await link[j].getProperty("href")).jsonValue();
     console.log(tweet);
     const pages = await browser.newPage();
     try {
@@ -119,12 +119,12 @@ for(let i=0;i<keyword.length;i++){
      
         await pages.waitForTimeout(1000);
         await pages.keyboard.type(comments[Math.floor(Math.random() * comments.length)],{delay:20});
-        await pages.waitForTimeout(100);
+        await pages.waitForTimeout(200); //100
         await pages.keyboard.press("Enter");
         await pages.evaluate(() => {
           document.querySelector("#submit-button").click();
         });
-        await page.waitForTimeout(4000);
+        await page.waitForTimeout(2000); //4000
         await pages.close();
         console.log("Success Comment");
         console.log("Keyword: "+keyword[i]+" j= " + j);
