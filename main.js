@@ -1,9 +1,15 @@
 /* 
 Made Originally By: https://github.com/tegal1337
 Updated & Upgraded By: https://github.com/KiritoTheDon
-Features Added: 
+Patch Notes:
+Features Added By KiritoTheDon (De'Mondre): 
 - Browser closes when done with all keywords
-- seamlessly continuing commenting all keywords till array is done
+- Seamlessly continuing commenting all keywords till array is done
+- Live troubleshooting capability
+_______________________________________________________________________
+Notes
+Add  Account switching feature to stop comments from failing to submit
+Max Efficency Theoretically - Run the program once with 1 account then switch and run with whatever # of accounts is availble
 */
 const puppeteer = require("puppeteer-extra");
 const StealthPlugin = require("puppeteer-extra-plugin-stealth");
@@ -89,8 +95,10 @@ for(let i=0;i<keyword.length;i++){
 
   console.log("Jumlah Link : ", link.length);
   let j =0;
-
+  let k = 0;
+  let c = 0;
   for (j in link) {
+    c=0;
     const tweet = await await (await link[j].getProperty("href")).jsonValue();
     console.log(tweet);
     const pages = await browser.newPage();
@@ -116,9 +124,9 @@ for(let i=0;i<keyword.length;i++){
     
         });
        
-     
+        c = [Math.floor(Math.random() * comments.length)];
         await pages.waitForTimeout(1000);
-        await pages.keyboard.type(comments[Math.floor(Math.random() * comments.length)],{delay:20});
+        await pages.keyboard.type(comments[c],{delay:15});
         await pages.waitForTimeout(200); //100
         await pages.keyboard.press("Enter");
         await pages.evaluate(() => {
@@ -127,7 +135,7 @@ for(let i=0;i<keyword.length;i++){
         await page.waitForTimeout(2000); //4000
         await pages.close();
         console.log("Success Comment");
-        console.log("Keyword: "+keyword[i]+" j= " + j);
+        console.log("Keyword: "+keyword[i]+" j= " + j + " Runs: " + k++ + " Comment #: " + c);
       }
       
     } catch(e) {
